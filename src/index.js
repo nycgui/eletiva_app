@@ -1,5 +1,7 @@
 const express = require("express")
 const app = express()
+const cliente = express()
+const vendas = express()
 
 //habilita recepcao de json
 app.use(express.json())
@@ -105,20 +107,6 @@ app.delete("/products/:id", (request, response) => {
 
 const categorias = express()
 
-app.get("/products/index/:id", (request, response) => {
-  const id = request.params.id
-  response.json(
-    [{
-      "id": id,
-      "nome": "Maca",
-      "image": "champson.pgn",
-      "categoria": "10",
-      "descricao": "Acabou de cair da arvore",
-      "status": "21"
-    }]
-  )
-})
-
 categorias.get("/nome/:nome", (request, response) => {
   const nome = request.params.nome
   var id = Math.random() * 10
@@ -158,5 +146,49 @@ categorias.delete("/remover/:id", (request, response) => {
   response.json({"message": "Categoria removida com sucesso"})
 })
 
+cliente.get("/buscar/", (request, response) => {
+  const {endereco, cidade, estado} = request.query
+
+  response.json(
+    [{
+      "id": "123",
+      "nome": "Maca",
+      "telefone": "1169588565",
+      "email": "nyc.gui@gmail.com",
+      "senha": "a##@$a",
+      "cpf": "548415151",
+      "endereco": endereco,
+      "cidade": cidade,
+      "estado": estado,
+      "bairro": "21"
+    }]
+  )
+})
+
+cliente.post("/adicionar", (request, response) => {
+  const {id, nome, telefone, email, senha, cpf, endereço, cidade, estado , bairro} = request.body
+  mensagem = 'Categoria cadastrada com sucesso'
+  var objeto = {
+    id,
+    nome,
+    telefone,
+    email,
+    senha,
+    cpf,
+    endereço,
+    cidade,
+    estado,
+    bairro
+  }
+  response.json(objeto)
+})
+
+cliente.delete("/remover/:id", (request, response) => {
+  const id = request.params.id
+  response.json({"message": "Cliente removido com sucesso"})
+})
+
+app.use('/vendas', vendas)
+app.use('/cliente', cliente)
 app.use('/categorias', categorias)
 app.listen(3000)
