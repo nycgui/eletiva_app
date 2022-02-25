@@ -31,8 +31,6 @@ app.get("/products", (request, response) => {
 })
 
 app.post("/products", (request, response) => {
-  const body = request.body
-  console.log(body)
   const {nome, image, categoria, descricao, status} = request.body
 
   min = Math.ceil(0)
@@ -105,4 +103,60 @@ app.delete("/products/:id", (request, response) => {
   response.json({"message": "Produto excluido com sucesso"})
 })
 
+const categorias = express()
+
+app.get("/products/index/:id", (request, response) => {
+  const id = request.params.id
+  response.json(
+    [{
+      "id": id,
+      "nome": "Maca",
+      "image": "champson.pgn",
+      "categoria": "10",
+      "descricao": "Acabou de cair da arvore",
+      "status": "21"
+    }]
+  )
+})
+
+categorias.get("/nome/:nome", (request, response) => {
+  const nome = request.params.nome
+  var id = Math.random() * 10
+  var descricao = "descricao descritiva"
+  response.json({
+    nome,
+    id,
+    descricao
+  })
+})
+
+categorias.get("/id/:id", (request, response) => {
+  var nome = 'Nyc'
+  const id = request.params.id
+  var descricao = "descricao descritiva"
+  response.json({
+    nome,
+    id,
+    descricao
+  })
+})
+
+categorias.post("/adicionar", (request, response) => {
+  const {id, nome, descricao} = request.body
+  mensagem = 'Categoria cadastrada com sucesso'
+  var objeto = {
+    id,
+    nome,
+    descricao,
+    mensagem
+  }
+  response.json(objeto)
+})
+
+categorias.delete("/remover/:id", (request, response) => {
+  const id = request.params.id
+  response.json({"message": "Categoria removida com sucesso"})
+})
+
+app.use('/categorias', categorias)
 app.listen(3000)
