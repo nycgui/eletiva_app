@@ -188,6 +188,41 @@ cliente.delete("/remover/:id", (request, response) => {
   response.json({"message": "Cliente removido com sucesso"})
 })
 
+vendas.post("/registrar", (request, response) => {
+  const {id, produto, cliente, quantidade, totalBruto , desconto, valorTotal} = request.body
+  mensagem = 'Categoria cadastrada com sucesso'
+  var objeto = {
+    id,
+    produto,
+    cliente,
+    quantidade,
+    totalBruto,
+    desconto,
+    valorTotal
+  }
+  response.json(objeto)
+})
+
+vendas.delete("/remover/:id", (request, response) => {
+  const id = request.params.id
+  response.json({"message": "Venda removida com sucesso"})
+})
+
+vendas.get("/buscar/", (request, response) => {
+  var {id, produto, cliente} = request.query
+  response.json(
+    [{
+      "id": id,
+      "produto": produto,
+      "cliente": cliente,
+      "quantidade": 2,
+      "totalBruto": 25.2,
+      "desconto": 10,
+      "valorTotal": 15.2
+    }]
+  )
+})
+
 app.use('/vendas', vendas)
 app.use('/cliente', cliente)
 app.use('/categorias', categorias)
