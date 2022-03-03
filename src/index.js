@@ -13,27 +13,27 @@ app.get("/home", (request, response) => {
 
 app.get("/products", (request, response) => {
   return response.json([
-  {
-    "id": "1",
-    "nome": "Batata Doce",
-    "image": "batata.pgn",
-    "categoria": "7",
-    "descricao": "Batata da boa",
-    "status": "1"
-  },
-  {
-    "id": "1",
-    "nome": "Batata Doce",
-    "image": "batata.pgn",
-    "categoria": "7",
-    "descricao": "Batata da boa",
-    "status": "1"
-  }
+    {
+      "id": "1",
+      "nome": "Batata Doce",
+      "image": "batata.pgn",
+      "categoria": "7",
+      "descricao": "Batata da boa",
+      "status": "1"
+    },
+    {
+      "id": "1",
+      "nome": "Batata Doce",
+      "image": "batata.pgn",
+      "categoria": "7",
+      "descricao": "Batata da boa",
+      "status": "1"
+    }
   ])
 })
 
 app.post("/products", (request, response) => {
-  const {nome, image, categoria, descricao, status} = request.body
+  const { nome, image, categoria, descricao, status } = request.body
 
   min = Math.ceil(0)
   max = Math.floor(99)
@@ -65,7 +65,7 @@ app.get("/products/index/:id", (request, response) => {
 })
 
 app.get("/products/list/", (request, response) => {
-  const {name, categId} = request.query
+  const { name, categId } = request.query
 
   const id = 1
   const image = "imagemmmm"
@@ -86,7 +86,7 @@ app.put("/products/:id", (request, response) => {
   const id = request.params.id
   const body = request.body
 
-  const {nome, image, categoria, descricao, status} = request.body
+  const { nome, image, categoria, descricao, status } = request.body
 
   var objeto = {
     id,
@@ -102,7 +102,7 @@ app.put("/products/:id", (request, response) => {
 
 app.delete("/products/:id", (request, response) => {
   const id = request.params.id
-  response.json({"message": "Produto excluido com sucesso"})
+  response.json({ "message": "Produto excluido com sucesso" })
 })
 
 const categorias = express()
@@ -130,7 +130,7 @@ categorias.get("/id/:id", (request, response) => {
 })
 
 categorias.post("/adicionar", (request, response) => {
-  const {id, nome, descricao} = request.body
+  const { id, nome, descricao } = request.body
   mensagem = 'Categoria cadastrada com sucesso'
   var objeto = {
     id,
@@ -143,11 +143,11 @@ categorias.post("/adicionar", (request, response) => {
 
 categorias.delete("/remover/:id", (request, response) => {
   const id = request.params.id
-  response.json({"message": "Categoria removida com sucesso"})
+  response.json({ "message": "Categoria removida com sucesso" })
 })
 
 cliente.get("/buscar/", (request, response) => {
-  const {endereco, cidade, estado} = request.query
+  const { endereco, cidade, estado } = request.query
 
   response.json(
     [{
@@ -166,7 +166,7 @@ cliente.get("/buscar/", (request, response) => {
 })
 
 cliente.post("/adicionar", (request, response) => {
-  const {id, nome, telefone, email, senha, cpf, endereço, cidade, estado , bairro} = request.body
+  const { id, nome, telefone, email, senha, cpf, endereço, cidade, estado, bairro } = request.body
   mensagem = 'Categoria cadastrada com sucesso'
   var objeto = {
     id,
@@ -185,11 +185,11 @@ cliente.post("/adicionar", (request, response) => {
 
 cliente.delete("/remover/:id", (request, response) => {
   const id = request.params.id
-  response.json({"message": "Cliente removido com sucesso"})
+  response.json({ "message": "Cliente removido com sucesso" })
 })
 
 vendas.post("/registrar", (request, response) => {
-  const {id, produto, cliente, quantidade, totalBruto , desconto, valorTotal} = request.body
+  const { id, produto, cliente, quantidade, totalBruto, desconto, valorTotal } = request.body
   mensagem = 'Categoria cadastrada com sucesso'
   var objeto = {
     id,
@@ -205,11 +205,11 @@ vendas.post("/registrar", (request, response) => {
 
 vendas.delete("/remover/:id", (request, response) => {
   const id = request.params.id
-  response.json({"message": "Venda removida com sucesso"})
+  response.json({ "message": "Venda removida com sucesso" })
 })
 
 vendas.get("/buscar/", (request, response) => {
-  var {id, produto, cliente} = request.query
+  var { id, produto, cliente } = request.query
   response.json(
     [{
       "id": id,
